@@ -1,6 +1,6 @@
 {
- "name": "GNAWBOX",
- "short_name": "GNAWBOX",
+ "name": "CHOMPY",
+ "short_name": "CHOMPY",
  "start_url": "./",
  "scope": "./",
  "display": "fullscreen",

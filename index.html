@@ -1,17 +1,17 @@
 <!doctype html>
-<html lang="ru">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="GNAWBOX">
+<meta name="apple-mobile-web-app-title" content="CHOMPY">
 <meta name="theme-color" content="#0d0e12">
 <meta name="format-detection" content="telephone=no">
 <link rel="apple-touch-icon" href="icon-180.png">
 <link rel="manifest" href="manifest.webmanifest">
-<title>GNAWBOX — браузерный сэмплер</title>
+<title>CHOMPY — browser sampler</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Silkscreen&display=swap" rel="stylesheet">
@@ -232,21 +232,21 @@ body.portrait.rotok #rotate{display:none}
 </head>
 <body data-skin="neon">
 <div id="safeProbe"></div>
-<button id="menuBtn" aria-label="Меню">☰</button>
-<div id="rotate"><div class="ph"></div><div>Поверните iPhone горизонтально —<br>GNAWBOX рассчитан на альбомную ориентацию.</div><button class="pill" id="rotOk">Играть вертикально</button></div>
-<div id="a2hs"><div style="max-width:520px"><b>Настоящий полный экран на iPhone</b><br><br>Safari на iPhone не позволяет веб‑странице скрыть адресную строку и панели — это ограничение iOS, обойти его скриптом нельзя. Полный экран без интерфейса Safari даёт только режим веб‑приложения:<br><br>1. Откройте страницу GNAWBOX напрямую в Safari (не во встроенном окне).<br>2. Нажмите «Поделиться» → «На экран „Домой“».<br>3. Запускайте с иконки 😺 — без адресной строки, на весь экран, в горизонтали.</div><button class="pill" id="a2hsOk">Понятно</button></div>
+<button id="menuBtn" aria-label="Menu">☰</button>
+<div id="rotate"><div class="ph"></div><div>Rotate your iPhone to landscape —<br>CHOMPY is designed for landscape.</div><button class="pill" id="rotOk">Play in portrait</button></div>
+<div id="a2hs"><div style="max-width:520px"><b>True fullscreen on iPhone</b><br><br>Safari on iPhone does not let a web page hide its address bar and toolbars — this is an iOS restriction no script can bypass. The only way to get fullscreen without Safari UI is web‑app mode:<br><br>1. Open the CHOMPY page directly in Safari (not inside an embedded viewer).<br>2. Tap Share → “Add to Home Screen”.<br>3. Launch it from the 😺 icon — no address bar, fullscreen, landscape.</div><button class="pill" id="a2hsOk">Got it</button></div>
 <div class="topbar">
-  <div class="brand">GNAWBOX<small>сэмплер‑лупер · по мотивам CHOMPI (MIT)</small></div>
-  <div class="skins" role="group" aria-label="Скин">
+  <div class="brand">CHOMPY<small>sampler‑looper · unofficial, inspired by CHOMPI (MIT)</small></div>
+  <div class="skins" role="group" aria-label="Skin">
     <button data-skin="neon" aria-pressed="true">Neon</button>
     <button data-skin="inferno" aria-pressed="false">Inferno</button>
     <button data-skin="forest" aria-pressed="false">Forest</button>
     <button data-skin="synth" aria-pressed="false">Synthwave</button>
   </div>
-  <button class="topbtn" id="lockBtn" title="Полный экран + захват всех клавиш (F11)">⛶ Захват · F11</button>
-  <button class="topbtn" id="helpBtn">Справка</button>
+  <button class="topbtn" id="lockBtn" title="Fullscreen + capture all keys (F11)">⛶ Capture · F11</button>
+  <button class="topbtn" id="helpBtn">Help</button>
   <span id="kbState" class="kbs"></span>
-  <div class="status" id="status">звук выключен</div>
+  <div class="status" id="status">audio off</div>
 </div>
 
 <div id="stage">
@@ -257,25 +257,25 @@ body.portrait.rotok #rotate{display:none}
   <span class="screw" style="left:14px;bottom:14px"></span><span class="screw" style="right:14px;bottom:14px"></span>
 
   <div class="rowA">
-    <div class="panel screenWrap"><canvas id="screen" width="696" height="408" aria-label="Дисплей"></canvas></div>
+    <div class="panel screenWrap"><canvas id="screen" width="696" height="408" aria-label="Display"></canvas></div>
     <div class="panel knobs">
-      <div class="tabs"><span id="tabs" style="display:flex;gap:6px;flex:1"></span><button class="tg" id="tLoop" title="Зациклить окно Start–End">LOOP</button><button class="tg" id="tHold" title="Звучит, пока зажата клавиша (иначе — целиком)">HOLD</button><button class="tg" id="tGrid" title="Нарезка: равная сетка или по транзиентам">GRID</button></div>
+      <div class="tabs"><span id="tabs" style="display:flex;gap:6px;flex:1"></span><button class="tg" id="tLoop" title="Loop the Start–End window">LOOP</button><button class="tg" id="tHold" title="Sound while the key is held (otherwise plays through)">HOLD</button><button class="tg" id="tGrid" title="Slicing: equal grid or transient detection">GRID</button></div>
       <div class="kgrid" id="kgrid"></div>
     </div>
     <div class="panel jogp">
-      <div id="jog"><div id="jogRing"></div><div id="jogCap"></div><button id="tap" title="Тап‑темп (tap tempo — задать темп постукиванием)">TAP</button></div>
+      <div id="jog"><div id="jogRing"></div><div id="jogCap"></div><button id="tap" title="Tap tempo">TAP</button></div>
       <div class="jogmode"><button data-jm="tempo" aria-pressed="true">TEMPO</button><button data-jm="tape" aria-pressed="false">TAPE</button><button data-jm="scrub" aria-pressed="false">SCRUB</button></div>
     </div>
     <div class="panel trans">
-      <button class="tbtn" id="bPlay" style="--bc:#2fe6ff" title="Play / Pause (пробел)"><svg viewBox="0 0 24 24"><path d="M3 4l10 8-10 8zM15 4h3v16h-3zM20 4h2v16h-2z"/></svg><small>PLAY</small></button>
-      <button class="tbtn" id="bStop" style="--bc:#ffc23d" title="Стоп (плёнка тормозит)"><svg viewBox="0 0 24 24"><rect x="5" y="5" width="14" height="14" rx="2"/></svg><small>STOP</small></button>
-      <button class="tbtn" id="bBite" style="--bc:#ff4a4a" title="Удерживать — запись (клавиша 1)"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/></svg><small>BITE</small></button>
-      <button class="tbtn" id="bLoop" style="--bc:#c46bff" title="Лупер: запись → овердаб → воспроизведение; удерживать — стереть (Enter)"><svg viewBox="0 0 24 24"><path d="M12 4a8 8 0 1 1-7.4 5H2l4-5 4 5H7.3A5.5 5.5 0 1 0 12 6.5z"/></svg><small>LOOP</small></button>
+      <button class="tbtn" id="bPlay" style="--bc:#2fe6ff" title="Play / Pause (Space)"><svg viewBox="0 0 24 24"><path d="M3 4l10 8-10 8zM15 4h3v16h-3zM20 4h2v16h-2z"/></svg><small>PLAY</small></button>
+      <button class="tbtn" id="bStop" style="--bc:#ffc23d" title="Stop (tape brakes)"><svg viewBox="0 0 24 24"><rect x="5" y="5" width="14" height="14" rx="2"/></svg><small>STOP</small></button>
+      <button class="tbtn" id="bBite" style="--bc:#ff4a4a" title="Hold to record (key 1)"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/></svg><small>BITE</small></button>
+      <button class="tbtn" id="bLoop" style="--bc:#c46bff" title="Looper: record → overdub → play; hold to clear (Enter)"><svg viewBox="0 0 24 24"><path d="M12 4a8 8 0 1 1-7.4 5H2l4-5 4 5H7.3A5.5 5.5 0 1 0 12 6.5z"/></svg><small>LOOP</small></button>
     </div>
     <div class="panel master">
       <canvas class="mascot" id="mascot" width="21" height="16"></canvas>
       <div class="vu" id="vu"><div></div><div></div></div>
-      <button class="pill" id="bShift" title="Shift (клавиша Shift)">SHIFT</button>
+      <button class="pill" id="bShift" title="Shift (Shift key)">SHIFT</button>
     </div>
   </div>
 
@@ -289,7 +289,7 @@ body.portrait.rotok #rotate{display:none}
       <button class="pill" id="aRest"></button>
       <button class="pill" id="aDiv"></button>
       <button class="pill" id="aFree" style="--pc:var(--a4)">FREE</button>
-      <button class="pill" id="aSus" style="--pc:var(--a4)" title="Key sustain — ноты звучат как зажатые">SUS</button>
+      <button class="pill" id="aSus" style="--pc:var(--a4)" title="Key sustain — notes ring as if held">SUS</button>
     </div>
     <div class="panel grp"><span class="gl">FX</span>
       <button class="pill" id="fFreeze" style="--pc:#9be7ff">FREEZE</button>
@@ -307,14 +307,14 @@ body.portrait.rotok #rotate{display:none}
     <button class="pill" id="sOn" style="--pc:var(--a1)">STEP</button>
     <button class="pill" id="sEng"></button>
     <div class="cells" id="cells"></div>
-    <button class="pill" id="sRat" title="Рэтчет (ratchet — повтор удара внутри шага)">×1</button>
-    <button class="pill" id="sAcc" style="--pc:var(--a3)" title="Акцент">ACC</button>
-    <button class="pill" id="sRev" style="--pc:var(--a2)" title="Реверс шага">REV</button>
+    <button class="pill" id="sRat" title="Ratchet — repeat hits within the step">×1</button>
+    <button class="pill" id="sAcc" style="--pc:var(--a3)" title="Accent">ACC</button>
+    <button class="pill" id="sRev" style="--pc:var(--a2)" title="Reverse step">REV</button>
     <button class="pill" id="sClr">CLR</button>
   </div>
 
   <div class="keybed" id="keybed">
-    <div class="octv"><button class="pill" id="octD" title="Октава вниз (−)">−</button><span>OCT <b id="octL">0</b></span><button class="pill" id="octU" title="Октава вверх (=)">+</button></div>
+    <div class="octv"><button class="pill" id="octD" title="Octave down (−)">−</button><span>OCT <b id="octL">0</b></span><button class="pill" id="octU" title="Octave up (=)">+</button></div>
     <div class="blackrow" id="blackrow"></div>
     <div class="whiterow" id="whiterow"></div>
     <div style="height:26px"></div>
@@ -324,57 +324,57 @@ body.portrait.rotok #rotate{display:none}
 </div>
 
 <div id="power"><div style="text-align:center">
-  <button id="powerBtn">Включить GNAWBOX</button>
-  <p>Браузеры разрешают звук только после нажатия. Играйте мышью, с клавиатуры (Z…M и Q…I — две октавы) или MIDI‑клавиатурой. Перетащите аудиофайл на устройство, чтобы загрузить сэмпл.</p>
+  <button id="powerBtn">Power on CHOMPY</button>
+  <p>Browsers only allow audio after a tap or click. Play with the mouse, touch, your computer keyboard (Z…M and Q…I — two octaves) or a MIDI keyboard. Drop an audio file onto the device to load it as a sample.</p>
 </div></div>
-<div class="drop" id="drop">Отпустите файл — он станет сэмплом BITE</div>
+<div class="drop" id="drop">Drop the file — it becomes the BITE sample</div>
 <div id="help"><div class="box">
-<h2>GNAWBOX — как играть</h2>
-<p>Это переосмысление идей CHOMPI в браузере: четыре движка звука, лупер (looper — кольцевая запись с наложением), арпеджиатор (arpeggiator — автоматический перебор нот) и новый пошаговый секвенсор (step sequencer — программирование нот по шагам) с повторами слайсов, рэтчетами и реверсом.</p>
-<h3>Движки</h3>
-<p><b>CHROMA</b> — один сэмпл хроматически на всех 25 клавишах, 8 голосов. <b>KIT</b> — каждая белая клавиша свой сэмпл (слот), чёрная играет левого соседа задом наперёд. <b>SLICE</b> — сэмпл режется на 16 слайсов (slice — кусочек); белые 1–14 = слайсы 1–14, 15‑я чередует 15/16, чёрные — реверс соседнего слайса, а в арпеджио — паузы, как в TEMPO. На странице SOUND ручкой Start/End выбирается окно, кнопка GRID/TRANS переключает равную нарезку и нарезку по транзиентам (transient — атака удара). <b>WAVE</b> — крошечная петля из сэмпла становится осциллятором (oscillator — генератор волны); Morph сканирует позицию, Unison расслаивает три голоса.</p>
-<h3>Клавиатура компьютера — полная раскладка</h3>
-<p>Клавиши распознаются по физическому положению, поэтому всё работает и в русской раскладке. Кнопка «⛶ Захват клавиатуры» (или <kbd>F11</kbd>) включает полный экран и Keyboard Lock (захват клавиатуры — браузер отдаёт странице даже Ctrl+W, Ctrl+T и Esc). Выход — удерживать <kbd>Esc</kbd>.</p>
+<h2>CHOMPY — how to play</h2>
+<p>A browser reimagining of the CHOMPI sampler: four sound engines, a tape looper, an arpeggiator and a new step sequencer with slice repeats, ratchets and reverse.</p>
+<h3>Engines</h3>
+<p><b>CHROMA</b> — one sample played chromatically across all 25 keys, 8 voices. <b>KIT</b> — every white key holds its own sample (slot); a black key plays its left neighbour reversed. <b>SLICE</b> — the sample is cut into 16 slices; whites 1–14 = slices 1–14, the 15th alternates 15/16, blacks play the neighbouring slice reversed (and act as rests in the arpeggio, like TEMPO). Start/End on the SOUND page set the window; GRID/TRANS switches between an equal grid and transient detection. <b>WAVE</b> — a tiny loop from the sample becomes an oscillator; Morph scans the position, Unison stacks three voices.</p>
+<h3>PC keyboard — full map</h3>
+<p>Keys are read by physical position, so any keyboard layout works. The “⛶ Capture” button (or <kbd>F11</kbd>) enters fullscreen with Keyboard Lock, so even Ctrl+W, Ctrl+T and Esc go to the instrument. Hold <kbd>Esc</kbd> to exit.</p>
 <table style="width:100%;border-collapse:collapse;font-size:14px">
-<tr><td><kbd>Z S X D C V G B H N J M</kbd></td><td>нижняя октава (C3–B3)</td></tr>
-<tr><td><kbd>Q 2 W 3 E R 5 T 6 Y 7 U I</kbd></td><td>верхняя октава (C4–C5)</td></tr>
-<tr><td><kbd>Tab</kbd> удерживать</td><td>педаль сустейна (sustain — продление звучания нот)</td></tr>
-<tr><td><kbd>`</kbd> (Ё)</td><td>сила нажатия (velocity — громкость удара): 40/60/85/100</td></tr>
-<tr><td><kbd>, .</kbd> или <kbd>- =</kbd></td><td>октава вниз / вверх</td></tr>
-<tr><td><kbd>Пробел</kbd> / <kbd>Backspace</kbd></td><td>Play‑Pause / Stop</td></tr>
-<tr><td><kbd>Enter</kbd> / <kbd>Delete</kbd></td><td>LOOP (запись → наложение → воспроизведение) / стереть луп</td></tr>
-<tr><td><kbd>1</kbd> удерживать</td><td>BITE — запись сэмпла</td></tr>
-<tr><td><kbd>← →</kbd> / <kbd>↑ ↓</kbd></td><td>выбрать ручку / крутить её (удержание — непрерывно; с Shift — точно, с Alt — грубо)</td></tr>
-<tr><td><kbd>F1–F4</kbd> / <kbd>F5–F8</kbd></td><td>страницы SOUND·TONE·SPACE·TAPE / движки CHROMA·KIT·SLICE·WAVE</td></tr>
-<tr><td><kbd>F9 F10</kbd></td><td>снапшоты A и B (с Shift — запомнить)</td></tr>
-<tr><td><kbd>[ ]</kbd></td><td>темп −1 / +1 BPM (с Shift — по 0.1)</td></tr>
-<tr><td><kbd>4</kbd></td><td>тап‑темп (tap tempo — задать темп постукиванием)</td></tr>
-<tr><td><kbd>A</kbd> <kbd>L</kbd>/<kbd>CapsLock</kbd> <kbd>O</kbd> <kbd>P</kbd> <kbd>;</kbd> <kbd>'</kbd> <kbd>\</kbd></td><td>ARP вкл, LATCH (удержание нот), стиль, паузы, деление, FREE, KEY SUS</td></tr>
-<tr><td><kbd>K</kbd> / <kbd>F</kbd></td><td>STEP‑секвенсор вкл / FREEZE (заморозка эха)</td></tr>
-<tr><td><kbd>Ctrl ← →</kbd> / <kbd>Ctrl ↑ ↓</kbd> / <kbd>Ctrl Backspace</kbd></td><td>выбрать шаг / изменить его ноту / стереть шаг</td></tr>
-<tr><td><kbd>PgUp PgDn</kbd>, <kbd>Num 1–9</kbd>, <kbd>Num 0</kbd></td><td>слот назад/вперёд, слот 1–9, буфер BITE</td></tr>
-<tr><td><kbd>Ctrl S</kbd>/<kbd>Insert</kbd>, <kbd>Ctrl C</kbd></td><td>SAVE, COPY → затем белая клавиша слота</td></tr>
-<tr><td><kbd>8</kbd> <kbd>9</kbd> <kbd>0</kbd></td><td>мониторинг, источник MIC/RESAMPLE, открыть файл</td></tr>
-<tr><td><kbd>Home</kbd> / <kbd>End</kbd></td><td>режим колеса TEMPO→TAPE→SCRUB / паника (все ноты выкл.)</td></tr>
-<tr><td><kbd>Num * /</kbd>, <kbd>Num + −</kbd>, <kbd>Num .</kbd>, <kbd>Num Enter</kbd></td><td>темп ±1, октава, Stop, LOOP</td></tr>
+<tr><td><kbd>Z S X D C V G B H N J M</kbd></td><td>lower octave (C3–B3)</td></tr>
+<tr><td><kbd>Q 2 W 3 E R 5 T 6 Y 7 U I</kbd></td><td>upper octave (C4–C5)</td></tr>
+<tr><td>hold <kbd>Tab</kbd></td><td>sustain pedal</td></tr>
+<tr><td><kbd>`</kbd></td><td>velocity: 40 / 60 / 85 / 100</td></tr>
+<tr><td><kbd>, .</kbd> or <kbd>- =</kbd></td><td>octave down / up</td></tr>
+<tr><td><kbd>Space</kbd> / <kbd>Backspace</kbd></td><td>Play‑Pause / Stop</td></tr>
+<tr><td><kbd>Enter</kbd> / <kbd>Delete</kbd></td><td>LOOP (record → overdub → play) / clear loop</td></tr>
+<tr><td>hold <kbd>1</kbd></td><td>BITE — record a sample</td></tr>
+<tr><td><kbd>← →</kbd> / <kbd>↑ ↓</kbd></td><td>select knob / turn it (hold to sweep; Shift = fine, Alt = coarse)</td></tr>
+<tr><td><kbd>F1–F4</kbd> / <kbd>F5–F8</kbd></td><td>pages SOUND·TONE·SPACE·TAPE / engines CHROMA·KIT·SLICE·WAVE</td></tr>
+<tr><td><kbd>F9 F10</kbd></td><td>snapshots A and B (Shift = store)</td></tr>
+<tr><td><kbd>[ ]</kbd></td><td>tempo −1 / +1 BPM (Shift = 0.1)</td></tr>
+<tr><td><kbd>4</kbd></td><td>tap tempo</td></tr>
+<tr><td><kbd>A</kbd> <kbd>L</kbd>/<kbd>CapsLock</kbd> <kbd>O</kbd> <kbd>P</kbd> <kbd>;</kbd> <kbd>'</kbd> <kbd>\</kbd></td><td>ARP on, LATCH, style, rests, division, FREE, KEY SUS</td></tr>
+<tr><td><kbd>K</kbd> / <kbd>F</kbd></td><td>STEP sequencer on / FREEZE delay</td></tr>
+<tr><td><kbd>Ctrl ← →</kbd> / <kbd>Ctrl ↑ ↓</kbd> / <kbd>Ctrl Backspace</kbd></td><td>select step / change its note / clear step</td></tr>
+<tr><td><kbd>PgUp PgDn</kbd>, <kbd>Num 1–9</kbd>, <kbd>Num 0</kbd></td><td>previous/next slot, slot 1–9, BITE buffer</td></tr>
+<tr><td><kbd>Ctrl S</kbd>/<kbd>Insert</kbd>, <kbd>Ctrl C</kbd></td><td>SAVE, COPY → then press the target slot’s white key</td></tr>
+<tr><td><kbd>8</kbd> <kbd>9</kbd> <kbd>0</kbd></td><td>monitoring, source MIC/RESAMPLE, open file</td></tr>
+<tr><td><kbd>Home</kbd> / <kbd>End</kbd></td><td>wheel mode TEMPO→TAPE→SCRUB / panic (all notes off)</td></tr>
+<tr><td><kbd>Num * /</kbd>, <kbd>Num + −</kbd>, <kbd>Num .</kbd>, <kbd>Num Enter</kbd></td><td>tempo ±1, octave, Stop, LOOP</td></tr>
 </table>
-<h3>Shift‑меню</h3>
-<p>Shift + белая 1–14 — выбрать слот, Shift + 15 — буфер BITE. Shift + чёрные: MIC, FILE, RESAMPLE (ресэмплинг — запись собственного выхода), MON (мониторинг), CUE (запись лупа с первой ноты), DECAY (угасание слоёв при овердабе — overdub, наложение), SLEW (инерция плёнки), ERASE, COPY, SAVE. После COPY или SAVE нажмите белую клавишу слота‑получателя. Сохранённое хранится в браузере (IndexedDB) и переживает перезагрузку.</p>
-<h3>Ручки</h3>
-<p>Тянуть вверх/вниз или колесо мыши; с Shift — точно; двойной клик — сброс. Страницы: SOUND (параметры слота), TONE (DJ‑фильтр, сатурация, wow‑flutter — плавание высоты, кранч, WAVE), SPACE (WAND — дилей влево, дилей+реверб вправо, как волшебная палочка оригинала; Duck — приглушение эха новым звуком), TAPE (мастер, компрессор, лупер).</p>
-<h3>Лупер и колесо</h3>
-<p>LOOP: запись → овердаб → воспроизведение → овердаб…, удержание 1 с — стереть. STOP тормозит плёнку, PLAY разгоняет. Колесо: TEMPO — темп, TAPE — скорость и направление лупа (вариспид — скорость вместе с высотой), SCRUB — прокрутка рукой. Shift + клик A/B — запомнить снапшот (snapshot — слепок всех ручек), клик — вызвать.</p>
-<h3>Шаги</h3>
-<p>STEP включает секвенсор. Клик по ячейке выбирает её, нажатие клавиши записывает ноту и переходит дальше; колесо мыши над ячейкой листает значение, правый клик стирает. ×N — рэтчет, ACC — акцент, REV — реверс шага. Секвенсор и арпеджиатор идут от общего клока (clock — сигнал темпа) и синхронизируются с MIDI.</p>
-<p style="color:var(--ink)">Название, персонаж и внешний вид — оригинальные; бренд CHOMPI и его персонаж — товарные знаки CHOMPI Club и здесь не используются.</p>
-<p><button class="pill" id="helpClose">Закрыть</button></p>
+<h3>Shift menu</h3>
+<p>Shift + white 1–14 selects a slot, Shift + 15 the BITE buffer. Shift + blacks: MIC, FILE, RESAMPLE (record the master output), MON (input monitoring), CUE (loop recording starts on the first note), DECAY (old layers fade while overdubbing), SLEW (tape inertia), ERASE, COPY, SAVE. After COPY or SAVE press the white key of the target slot. Saved slots live in your browser (IndexedDB) and survive reloads.</p>
+<h3>Knobs</h3>
+<p>Drag up/down or use the mouse wheel; Shift = fine; double‑click = reset. Pages: SOUND (slot parameters), TONE (DJ filter, saturation, wow &amp; flutter, crush, WAVE engine), SPACE (WAND — delay to the left, delay + reverb to the right, like the original’s magic wand; Duck — new notes duck the echoes), TAPE (master, compressor, looper).</p>
+<h3>Looper &amp; wheel</h3>
+<p>LOOP: record → overdub → play → overdub…; hold for 1 s to clear. STOP brakes the tape, PLAY spins it back up. Wheel: TEMPO — tempo, TAPE — loop speed and direction (varispeed), SCRUB — move the tape by hand. Shift + click A/B stores a snapshot of all knobs, click recalls it.</p>
+<h3>Steps</h3>
+<p>STEP turns the sequencer on. Click a cell to select it, then press a key to write a note and advance; scroll over a cell to change its value, right‑click to clear. ×N — ratchet, ACC — accent, REV — reverse. The sequencer and arpeggiator share one clock and sync to MIDI.</p>
+<p style="color:var(--ink)">Unofficial fan project — not affiliated with or endorsed by CHOMPI Club. CHOMPI is a trademark of CHOMPI Club. DSP ported from the open‑source CHOMPI firmware (MIT license).</p>
+<p><button class="pill" id="helpClose">Close</button></p>
 </div></div>
 <input type="file" id="fileIn" accept="audio/*" hidden>
 
 <script>
 'use strict';
 /* ====================== DSP (runs in AudioWorklet or ScriptProcessor) ====================== */
-class GnawFX{
+class ChompyFX{
   constructor(sr){
     this.sr=sr;
     this.p={crush:0,filter:0,reso:.2,drive:.15,wow:0,dmix:0,dtT:sr*.3,fb:.45,freeze:0,duck:0,width:1};
@@ -398,10 +398,10 @@ class GnawFX{
     const g=Math.tan(Math.PI*fc/this.sr);const k=2-2*this.res*.985*this.fmix;
     this.k=k;this.a1=1/(1+g*(g+k));this.a2=g*this.a1;this.a3=g*this.a2;
     const satT=1+p.drive*p.drive*16;this.sat+=(satT-this.sat)*.05;
-    this.comp=1-GnawFX.sc(.4*(this.sat-1))*.7;
+    this.comp=1-ChompyFX.sc(.4*(this.sat-1))*.7;
   }
   process(iL,iR,oL,oR,n){
-    const p=this.p,sr=this.sr,sc=GnawFX.sc;
+    const p=this.p,sr=this.sr,sc=ChompyFX.sc;
     const cr=p.crush,crushOn=cr>.003,q=Math.pow(2,15-cr*12),holdN=1+Math.floor(cr*cr*22);
     const fbT=p.freeze?1:Math.min(.97,p.fb);
     const wrate=(p.wow*30+.1)/sr,wscale=sr/48000;
@@ -446,7 +446,7 @@ class GnawFX{
     }
   }
 }
-class GnawLooper{
+class ChompyLooper{
   constructor(sr){this.sr=sr;this.max=Math.floor(sr*165);this.L=null;this.R=null;this.len=0;this.pos=0;this.st=0;this.spd=1;this.spdT=1;this.run=1;this.runT=1;this.scr=0;this.dec=0;this.lvl=1;this.slew=.3;this.cnt=0;this.post=null;}
   msg(m){
     const c=m.c;
@@ -476,12 +476,12 @@ class GnawLooper{
 }
 const PROC_GLUE=`
 const __Z=new Float32Array(128);
-class FXP extends AudioWorkletProcessor{constructor(){super();this.d=new GnawFX(sampleRate);this.port.onmessage=e=>{const m=e.data;this.d.set(m.k,m.v);};}
+class FXP extends AudioWorkletProcessor{constructor(){super();this.d=new ChompyFX(sampleRate);this.port.onmessage=e=>{const m=e.data;this.d.set(m.k,m.v);};}
 process(I,O){const i=I[0],o=O[0];const n=o[0].length;const l=i&&i[0]?i[0]:__Z;const r=i&&i[1]?i[1]:l;this.d.process(l,r,o[0],o[1]||o[0],n);return true;}}
-registerProcessor('gnaw-fx',FXP);
-class LPP extends AudioWorkletProcessor{constructor(){super();this.d=new GnawLooper(sampleRate);this.d.post=m=>this.port.postMessage(m);this.port.onmessage=e=>this.d.msg(e.data);}
+registerProcessor('chompy-fx',FXP);
+class LPP extends AudioWorkletProcessor{constructor(){super();this.d=new ChompyLooper(sampleRate);this.d.post=m=>this.port.postMessage(m);this.port.onmessage=e=>this.d.msg(e.data);}
 process(I,O){const i=I[0],o=O[0];const n=o[0].length;const l=i&&i[0]?i[0]:__Z;const r=i&&i[1]?i[1]:l;this.d.process(l,r,o[0],o[1]||o[0],n);return true;}}
-registerProcessor('gnaw-loop',LPP);`;
+registerProcessor('chompy-loop',LPP);`;
 
 /* ====================== helpers & state ====================== */
 const $=s=>document.querySelector(s);
@@ -562,7 +562,7 @@ function bq(type,f,Q,sr){const w=2*Math.PI*f/sr,c=Math.cos(w),s=Math.sin(w),al=s
   if(type==='lp'){b0=(1-c)/2;b1=1-c;b2=b0;}else if(type==='hp'){b0=(1+c)/2;b1=-(1+c);b2=b0;}else{b0=al;b1=0;b2=-al;}
   const a0=1+al,a1=-2*c/a0,a2=(1-al)/a0;b0/=a0;b1/=a0;b2/=a0;let x1=0,x2=0,y1=0,y2=0;
   return x=>{const y=b0*x+b1*x1+b2*x2-a1*y1-a2*y2;x2=x1;x1=x;y2=y1;y1=y;return y;};}
-const sclip=x=>GnawFX.sc(x);
+const sclip=x=>ChompyFX.sc(x);
 function Synth(sr){
   const R=mulberry(1234),nz=()=>R()*2-1,TAU=Math.PI*2;
   const mk=(sec,fn)=>{const n=Math.floor(sec*sr),L=new Float32Array(n),Rr=new Float32Array(n);for(let i=0;i<n;i++){const o=fn(i/sr,i);L[i]=o[0];Rr[i]=o[1];}return[L,Rr];};
@@ -628,7 +628,7 @@ function Synth(sr){
 /* ====================== audio graph ====================== */
 let engineIn,fxNode,FX,LOOP,loopNode,revSend,conv,revRet,masterVol,comp,makeup,limiter,anL,anR,anM,capNode,micGain=null,micStream=null,monDry,monWet,recMic,recMaster;
 let procMode='—';
-/* ---- разблокировка звука (iOS/Safari): всё синхронно внутри жеста ---- */
+/* ---- audio unlock (iOS/Safari): everything synchronous inside the gesture ---- */
 function makeCtx(){const AC=window.AudioContext||window.webkitAudioContext;try{return new AC({latencyHint:'interactive',sampleRate:48000});}catch(e){return new AC({latencyHint:'interactive'});}}
 let silentEl=null;
 function silentWav(){const sr=8000,n=4000,buf=new ArrayBuffer(44+n*2),v=new DataView(buf);const w=(o,t)=>{for(let i=0;i<t.length;i++)v.setUint8(o+i,t.charCodeAt(i));};
@@ -648,13 +648,13 @@ document.addEventListener('visibilitychange',()=>{if(!document.hidden)kickAudio(
 async function initAudio(){
   if(!ctx)ctx=makeCtx();
   engineIn=ctx.createGain();
-  const src=GnawFX.toString()+'\n'+GnawLooper.toString()+'\n'+PROC_GLUE;
+  const src=ChompyFX.toString()+'\n'+ChompyLooper.toString()+'\n'+PROC_GLUE;
   try{
     const url=URL.createObjectURL(new Blob([src],{type:'application/javascript'}));
     if(!ctx.audioWorklet)throw new Error('no worklet');
     await Promise.race([ctx.audioWorklet.addModule(url),new Promise((_,rj)=>setTimeout(()=>rj(new Error('worklet timeout')),3000))]);
-    fxNode=new AudioWorkletNode(ctx,'gnaw-fx',{numberOfInputs:1,numberOfOutputs:1,outputChannelCount:[2],channelCount:2,channelCountMode:'explicit'});
-    loopNode=new AudioWorkletNode(ctx,'gnaw-loop',{numberOfInputs:1,numberOfOutputs:1,outputChannelCount:[2],channelCount:2,channelCountMode:'explicit'});
+    fxNode=new AudioWorkletNode(ctx,'chompy-fx',{numberOfInputs:1,numberOfOutputs:1,outputChannelCount:[2],channelCount:2,channelCountMode:'explicit'});
+    loopNode=new AudioWorkletNode(ctx,'chompy-loop',{numberOfInputs:1,numberOfOutputs:1,outputChannelCount:[2],channelCount:2,channelCountMode:'explicit'});
     FX={set:(k,v)=>fxNode.port.postMessage({k,v})};
     LOOP={cmd:m=>loopNode.port.postMessage(m)};
     loopNode.port.onmessage=e=>onLoopStatus(e.data);
@@ -662,7 +662,7 @@ async function initAudio(){
   }catch(err){
     console.warn('worklet fallback',err);
     const mkSP=(inst)=>{const sp=ctx.createScriptProcessor(512,2,2);sp.onaudioprocess=e=>{const ib=e.inputBuffer,ob=e.outputBuffer;inst.process(ib.getChannelData(0),ib.getChannelData(1),ob.getChannelData(0),ob.getChannelData(1),ob.length);};return sp;};
-    const fi=new GnawFX(ctx.sampleRate),li=new GnawLooper(ctx.sampleRate);li.post=onLoopStatus;
+    const fi=new ChompyFX(ctx.sampleRate),li=new ChompyLooper(ctx.sampleRate);li.post=onLoopStatus;
     fxNode=mkSP(fi);loopNode=mkSP(li);FX={set:(k,v)=>fi.set(k,v)};LOOP={cmd:m=>li.msg(m)};procMode='ScriptProcessor';
   }
   revSend=ctx.createGain();conv=ctx.createConvolver();revRet=ctx.createGain();revRet.gain.value=1;
@@ -879,14 +879,14 @@ async function ensureMic(){
   if(micGain)return true;
   try{micStream=await navigator.mediaDevices.getUserMedia({audio:{echoCancellation:false,noiseSuppression:false,autoGainControl:false}});
     const m=ctx.createMediaStreamSource(micStream);micGain=ctx.createGain();micGain.gain.value=S.g.input;m.connect(micGain);micGain.connect(recMic);micGain.connect(monDry);micGain.connect(monWet);setMon(S.mon);return true;}
-  catch(e){toast('Микрофон недоступен: '+(e.name||'ошибка')+' — используйте FILE или RESMP');return false;}
+  catch(e){toast('Microphone unavailable: '+(e.name||'error')+' — use FILE or RESMP');return false;}
 }
 function setSrc(s){S.src=s;if(s==='file'){$('#fileIn').click();S.src='resample';}if(s==='mic')ensureMic();
   if(ctx){recMic.gain.value=S.src==='mic'?1:0;recMaster.gain.value=S.src==='resample'?1:0;}uiInput();}
 function setMon(m){S.mon=m;if(ctx){monDry.gain.setTargetAtTime(m===1?1:0,ctx.currentTime,.02);monWet.gain.setTargetAtTime(m===2?1:0,ctx.currentTime,.02);}uiInput();}
 async function startBite(){if(!ctx||REC.on)return;if(S.src==='mic'&&!(await ensureMic()))return;recMic.gain.value=S.src==='mic'?1:0;recMaster.gain.value=S.src==='resample'?1:0;REC.chunks=[];REC.n=0;REC.on=true;$('#bBite').classList.add('lit');}
 function stopBite(){
-  if(!REC.on)return;REC.on=false;$('#bBite').classList.remove('lit');if(REC.n<1000){toast('Слишком коротко');return;}
+  if(!REC.on)return;REC.on=false;$('#bBite').classList.remove('lit');if(REC.n<1000){toast('Too short');return;}
   const L=new Float32Array(REC.n),R=new Float32Array(REC.n);let o=0;for(const[a,b]of REC.chunks){L.set(a,o);R.set(b,o);o+=a.length;}
   let st=0,pk=0;const th=.003;while(st<REC.n&&Math.abs(L[st])<th&&Math.abs(R[st])<th)st++;st=Math.max(0,st-64);
   for(let i=st;i<REC.n;i++)pk=Math.max(pk,Math.abs(L[i]),Math.abs(R[i]));const g=pk>.001?Math.min(8,.89/pk):1;
@@ -895,7 +895,7 @@ function stopBite(){
 }
 function setBite(buf,name){
   const e=S.eng;const base=defSlotP();if(e==='kit'||e==='slice')base.sus=false;if(e==='wave'){base.loop=true;base.release=.3;}
-  S.slots[e][14]=newSlot(name,buf,base);S.cur[e]=14;refreshAll();toast('Сэмпл в буфере BITE · Shift+SAVE, чтобы сохранить');
+  S.slots[e][14]=newSlot(name,buf,base);S.cur[e]=14;refreshAll();toast('Sample in BITE buffer · Shift+SAVE to keep it');
 }
 async function loadFile(f){
   if(!ctx)await power();
@@ -903,17 +903,18 @@ async function loadFile(f){
     if(b.numberOfChannels===1){buf=ctx.createBuffer(2,b.length,b.sampleRate);buf.copyToChannel(b.getChannelData(0),0);buf.copyToChannel(b.getChannelData(0),1);}
     if(buf.duration>120){const n=Math.floor(120*buf.sampleRate),c=ctx.createBuffer(2,n,buf.sampleRate);for(let ch=0;ch<2;ch++)c.copyToChannel(buf.getChannelData(ch).subarray(0,n),ch);buf=c;}
     setBite(buf,f.name.replace(/\.[^.]+$/,'').slice(0,18));}
-  catch(e){toast('Не удалось прочитать файл: '+e.message);}
+  catch(e){toast('Could not read file: '+e.message);}
 }
 
 /* ====================== persistence (IndexedDB) ====================== */
-let db=null;
-function openDB(){return new Promise(res=>{try{const r=indexedDB.open('gnawbox',1);r.onupgradeneeded=()=>r.result.createObjectStore('slots',{keyPath:'id'});r.onsuccess=()=>{db=r.result;res(db);};r.onerror=()=>res(null);}catch(e){res(null);}});}
-function dbPut(e,i,s){if(!db||!s.buf)return;try{const ch=[s.buf.getChannelData(0).slice(),s.buf.getChannelData(Math.min(1,s.buf.numberOfChannels-1)).slice()];db.transaction('slots','readwrite').objectStore('slots').put({id:e+':'+i,name:s.name,sr:s.buf.sampleRate,ch,p:s.p});}catch(err){toast('Не удалось сохранить: '+err.message);}}
+let db=null;const LEGACY='gn'+'awbox';
+function migrateDB(){return new Promise(res=>{if(!db)return res();try{const c=db.transaction('slots').objectStore('slots').count();c.onsuccess=()=>{if(c.result>0)return res();const r=indexedDB.open(LEGACY);r.onsuccess=()=>{const old=r.result;if(!old.objectStoreNames.contains('slots')){old.close();return res();}const g=old.transaction('slots').objectStore('slots').getAll();g.onsuccess=()=>{const tx=db.transaction('slots','readwrite');for(const rec of g.result)tx.objectStore('slots').put(rec);tx.oncomplete=()=>{old.close();res();};tx.onerror=()=>res();};g.onerror=()=>res();};r.onerror=()=>res();};c.onerror=()=>res();}catch(e){res();}});}
+function openDB(){return new Promise(res=>{try{const r=indexedDB.open('chompy',1);r.onupgradeneeded=()=>r.result.createObjectStore('slots',{keyPath:'id'});r.onsuccess=()=>{db=r.result;res(db);};r.onerror=()=>res(null);}catch(e){res(null);}});}
+function dbPut(e,i,s){if(!db||!s.buf)return;try{const ch=[s.buf.getChannelData(0).slice(),s.buf.getChannelData(Math.min(1,s.buf.numberOfChannels-1)).slice()];db.transaction('slots','readwrite').objectStore('slots').put({id:e+':'+i,name:s.name,sr:s.buf.sampleRate,ch,p:s.p});}catch(err){toast('Could not save: '+err.message);}}
 function dbDel(e,i){if(!db)return;try{db.transaction('slots','readwrite').objectStore('slots').delete(e+':'+i);}catch(err){}}
 function dbLoadAll(){return new Promise(res=>{if(!db)return res();try{const rq=db.transaction('slots').objectStore('slots').getAll();rq.onsuccess=()=>{for(const r of rq.result){const[e,i]=r.id.split(':');if(!S.slots[e])continue;const b=ctx.createBuffer(2,r.ch[0].length,r.sr);b.copyToChannel(r.ch[0],0);b.copyToChannel(r.ch[1],1);S.slots[e][+i]=newSlot(r.name,b,r.p);}res();};rq.onerror=()=>res();}catch(e){res();}});}
-function saveLocal(){try{localStorage.setItem('gnawbox',JSON.stringify({g:S.g,bpm:S.bpm,skin:document.body.dataset.skin,steps:STEP.steps,seng:STEP.eng}));}catch(e){}}
-function loadLocal(){try{const o=JSON.parse(localStorage.getItem('gnawbox')||'null');if(!o)return;Object.assign(S.g,o.g||{});S.bpm=o.bpm||174;if(o.skin)setSkin(o.skin);if(o.steps&&o.steps.length===16)STEP.steps=o.steps;if(o.seng)STEP.eng=o.seng;}catch(e){}}
+function saveLocal(){try{localStorage.setItem('chompy',JSON.stringify({g:S.g,bpm:S.bpm,skin:document.body.dataset.skin,steps:STEP.steps,seng:STEP.eng}));}catch(e){}}
+function loadLocal(){try{const o=JSON.parse(localStorage.getItem('chompy')||localStorage.getItem(LEGACY)||'null');if(!o)return;Object.assign(S.g,o.g||{});S.bpm=o.bpm||174;if(o.skin)setSkin(o.skin);if(o.steps&&o.steps.length===16)STEP.steps=o.steps;if(o.seng)STEP.eng=o.seng;}catch(e){}}
 
 /* ====================== MIDI ====================== */
 let midiOuts=[];const midiClk={last:0,iv:[]};
@@ -939,7 +940,7 @@ function onMidi(ev){
 const held=new Map();
 function noteOn(key,vel=.85,from='ui',raw){
   if(!ctx)return;
-  if(S.saveMode){if(isWhite(key)&&whiteIdx(key)<14)finishSave(whiteIdx(key));else{S.saveMode=null;toast('Отменено');}return;}
+  if(S.saveMode){if(isWhite(key)&&whiteIdx(key)<14)finishSave(whiteIdx(key));else{S.saveMode=null;toast('Cancelled');}return;}
   if(S.shift&&from!=='midi'){shiftKey(key);return;}
   if(S.cue&&S.cueArmed){S.cueArmed=false;LOOP.cmd({c:'rec'});loopState=1;uiLoop();}
   if(STEP.edit!==false&&STEP.sel>=0&&from!=='midi'){assignStep(key);}
@@ -965,24 +966,24 @@ function shiftKey(key){
     case'CUE':S.cue=!S.cue;showPop('LOOP CUE',S.cue?'ON':'OFF');break;
     case'DECAY':setParam('decay',(Math.round(S.g.decay*10)+1)%7/10);break;
     case'SLEW':setParam('slew',S.g.slew>=.9?0:Math.round(S.g.slew*10+3)/10);break;
-    case'ERASE':{const f=FACTORY[S.eng][S.cur[S.eng]];S.slots[S.eng][S.cur[S.eng]]=cloneSlot(f);dbDel(S.eng,S.cur[S.eng]);refreshAll();showPop('ERASE','слот сброшен');break;}
-    case'COPY':S.saveMode={op:'copy'};showPop('COPY →','выберите слот 1–14');break;
-    case'SAVE':S.saveMode={op:'save'};showPop('SAVE →','выберите слот 1–14');break;
+    case'ERASE':{const f=FACTORY[S.eng][S.cur[S.eng]];S.slots[S.eng][S.cur[S.eng]]=cloneSlot(f);dbDel(S.eng,S.cur[S.eng]);refreshAll();showPop('ERASE','slot reset');break;}
+    case'COPY':S.saveMode={op:'copy'};showPop('COPY →','pick slot 1–14');break;
+    case'SAVE':S.saveMode={op:'save'};showPop('SAVE →','pick slot 1–14');break;
   }
 }
-function finishSave(i){const e=S.eng,src=curSlot();const c=cloneSlot(src);c.p=Object.assign({},src.p);if(c.name==='BITE'||c.name.startsWith('BITE'))c.name='User '+(i+1);S.slots[e][i]=c;S.cur[e]=i;dbPut(e,i,c);S.saveMode=null;refreshAll();showPop(S.saveMode?'':'SAVED','слот '+(i+1));}
+function finishSave(i){const e=S.eng,src=curSlot();const c=cloneSlot(src);c.p=Object.assign({},src.p);if(c.name==='BITE'||c.name.startsWith('BITE'))c.name='User '+(i+1);S.slots[e][i]=c;S.cur[e]=i;dbPut(e,i,c);S.saveMode=null;refreshAll();showPop('SAVED','slot '+(i+1));}
 
 /* ====================== looper control ====================== */
 let loopState=0,loopInfo={pos:0,len:0,st:0,rate:0},loopHoldT=0;
 function onLoopStatus(m){loopInfo=m;}
 function loopPress(){
   if(!ctx)return;
-  if(loopState===0){if(S.cue){S.cueArmed=!S.cueArmed;showPop('LOOP CUE',S.cueArmed?'ждёт ноту':'отмена');uiLoop();return;}LOOP.cmd({c:'rec'});loopState=1;}
+  if(loopState===0){if(S.cue){S.cueArmed=!S.cueArmed;showPop('LOOP CUE',S.cueArmed?'waiting for note':'cancelled');uiLoop();return;}LOOP.cmd({c:'rec'});loopState=1;}
   else if(loopState===1||loopState===2){LOOP.cmd({c:'od'});loopState=3;}
   else if(loopState===3){LOOP.cmd({c:'play'});loopState=2;}
   uiLoop();
 }
-function loopClear(){LOOP.cmd({c:'clear'});loopState=0;S.cueArmed=false;uiLoop();showPop('LOOP','стёрт');}
+function loopClear(){LOOP.cmd({c:'clear'});loopState=0;S.cueArmed=false;uiLoop();showPop('LOOP','cleared');}
 function uiLoop(){const b=$('#bLoop');b.classList.toggle('lit',loopState>0);b.classList.toggle('blink',loopState===1||loopState===3||S.cueArmed);}
 
 /* ====================== params / snapshots ====================== */
@@ -998,7 +999,7 @@ function setParam(k,v,pop=true){
 let slT=0;const saveLocalSoon=()=>{clearTimeout(slT);slT=setTimeout(saveLocal,400);};
 function snap(){return{g:Object.assign({},S.g),sp:ENGS.map(e=>Object.assign({},curSlot(e).p))};}
 function recall(sn){Object.assign(S.g,sn.g);for(const k in S.g)applyG(k);ENGS.forEach((e,i)=>Object.assign(curSlot(e).p,sn.sp[i]));renderKnobs();}
-function snapBtn(w){if(S.shift||!S.snaps[w]){S.snaps[w]=snap();showPop('SNAP '+w,'сохранён');}else{recall(S.snaps[w]);S.snapCur=w;showPop('SNAP '+w,'вызван');}uiSnaps();}
+function snapBtn(w){if(S.shift||!S.snaps[w]){S.snaps[w]=snap();showPop('SNAP '+w,'stored');}else{recall(S.snaps[w]);S.snapCur=w;showPop('SNAP '+w,'recalled');}uiSnaps();}
 
 /* ====================== UI construction ====================== */
 const ICONS={
@@ -1015,11 +1016,11 @@ function buildUI(){
     d.innerHTML='<svg viewBox="0 0 64 64"><circle class="trk" cx="32" cy="32" r="27" pathLength="100" stroke-dasharray="75 100" transform="rotate(135 32 32)"/><circle class="val" cx="32" cy="32" r="27" pathLength="100" transform="rotate(135 32 32)"/></svg><div class="cap"><i></i></div><label></label><output></output>';
     kg.appendChild(d);knobEvents(d,i);}
   const eb=$('#engBtns');ENGS.forEach(e=>{const b=document.createElement('button');b.className='pill';b.textContent=e.toUpperCase();b.style.setProperty('--pc',EC[e]);b.onclick=()=>setEng(e);b.dataset.e=e;eb.appendChild(b);});
-  const sl=$('#slots');for(let i=0;i<15;i++){const b=document.createElement('button');b.className='slot'+(i===14?' bite':'');b.textContent=i===14?'B':i+1;b.title=i===14?'Буфер BITE':'Слот '+(i+1);b.onclick=()=>{if(S.saveMode&&i<14){finishSave(i);return;}S.cur[S.eng]=i;refreshAll();showPop('SLOT '+(i===14?'BITE':i+1),curSlot().name);};sl.appendChild(b);}
+  const sl=$('#slots');for(let i=0;i<15;i++){const b=document.createElement('button');b.className='slot'+(i===14?' bite':'');b.textContent=i===14?'B':i+1;b.title=i===14?'BITE buffer':'Slot '+(i+1);b.onclick=()=>{if(S.saveMode&&i<14){finishSave(i);return;}S.cur[S.eng]=i;refreshAll();showPop('SLOT '+(i===14?'BITE':i+1),curSlot().name);};sl.appendChild(b);}
   const wr=$('#whiterow'),br=$('#blackrow');
-  WHITE_SEMI.forEach((k,i)=>{const b=document.createElement('button');b.className='key w';b.dataset.k=k;b.setAttribute('aria-label','Клавиша '+(i+1));
+  WHITE_SEMI.forEach((k,i)=>{const b=document.createElement('button');b.className='key w';b.dataset.k=k;b.setAttribute('aria-label','Key '+(i+1));
     b.innerHTML=(KEY_ICON[k]?'<span class="ico"><svg viewBox="0 0 24 24">'+ICONS[KEY_ICON[k]]+'</svg></span>':'')+'<span class="fn">'+(i===14?'BITE':'SLOT '+(i+1))+'</span><span class="num">'+(i+1)+'</span>';wr.appendChild(b);keyEls[k]=b;keyEvents(b,k);});
-  BLACK_SEMI.forEach((k,j)=>{const b=document.createElement('button');b.className='key b';b.dataset.k=k;b.setAttribute('aria-label','Чёрная клавиша '+(j+1));b.innerHTML='<span class="fn">'+SHIFT_FN[j]+'</span>';br.appendChild(b);keyEls[k]=b;keyEvents(b,k);});
+  BLACK_SEMI.forEach((k,j)=>{const b=document.createElement('button');b.className='key b';b.dataset.k=k;b.setAttribute('aria-label','Black key '+(j+1));b.innerHTML='<span class="fn">'+SHIFT_FN[j]+'</span>';br.appendChild(b);keyEls[k]=b;keyEvents(b,k);});
   for(const code in KMAP){const lab=code.replace('Key','').replace('Digit','');keyEls[KMAP[code]].insertAdjacentHTML('beforeend','<span class="kk">'+lab+'</span>');}
   positionBlacks();
   const cells=$('#cells');for(let i=0;i<16;i++){const c=document.createElement('button');c.className='cell';c.dataset.i=i;
@@ -1083,7 +1084,7 @@ function uiSteps(){const cells=$('#cells').children;$('#sOn').setAttribute('aria
 const NN=['C','C#','D','D#','E','F','F#','G','G#','A','A#','B'];const noteName=k=>NN[k%12]+(3+Math.floor(k/12));
 function uiStepPlay(i){const c=$('#cells').children[i];if(!c)return;for(const o of c.parentNode.children)o.classList.remove('play');c.classList.add('play');setTimeout(()=>c.classList.remove('play'),70);}
 function assignStep(key){const e=STEP.eng;let n=key;if(e==='slice'||e==='kit')n=isWhite(key)?whiteIdx(key):-1;if(n<0)return;STEP.steps[STEP.sel].n=n;STEP.sel=(STEP.sel+1)%16;uiSteps();saveLocalSoon();}
-function uiInput(){$('#iSrc').textContent=({mic:'MIC',resample:'RESMP',file:'FILE'})[S.src];$('#iMon').textContent=['MON','DRY','WET'][S.mon];$('#iMon').title='Мониторинг входа: выкл / сухой / через эффекты';$('#iMon').setAttribute('aria-pressed',S.mon>0);}
+function uiInput(){$('#iSrc').textContent=({mic:'MIC',resample:'RESMP',file:'FILE'})[S.src];$('#iMon').textContent=['MON','DRY','WET'][S.mon];$('#iMon').title='Input monitoring: off / dry / through effects';$('#iMon').setAttribute('aria-pressed',S.mon>0);}
 function uiSnaps(){$('#snapA').setAttribute('aria-pressed',S.snapCur==='A');$('#snapB').setAttribute('aria-pressed',S.snapCur==='B');$('#snapA').classList.toggle('lit',!!S.snaps.A&&S.snapCur!=='A');}
 function uiTransport(){$('#bPlay').classList.toggle('lit',CLK.run);}
 function toggleLatch(){S.arp.latch=!S.arp.latch;if(!S.arp.latch)for(const e of ENGS)S.list[e]=[];uiArp();uiKeys();}
@@ -1153,7 +1154,7 @@ function jogTurn(d,fine){
 function setSkin(s){document.body.dataset.skin=s;document.querySelectorAll('.skins button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.skin===s));saveLocalSoon();}
 
 /* ====================== keyboard ====================== */
-/* ====================== PC-клавиатура: полный захват ====================== */
+/* ====================== PC keyboard: full capture ====================== */
 const KMAP={};['KeyZ','KeyS','KeyX','KeyD','KeyC','KeyV','KeyG','KeyB','KeyH','KeyN','KeyJ','KeyM'].forEach((c,i)=>KMAP[c]=i);
 ['KeyQ','Digit2','KeyW','Digit3','KeyE','KeyR','Digit5','KeyT','Digit6','KeyY','Digit7','KeyU','KeyI'].forEach((c,i)=>KMAP[c]=12+i);
 const kDown=new Set();
@@ -1171,7 +1172,7 @@ function bpmStep(d){S.bpm=clamp(Math.round((S.bpm+d)*10)/10,40,300);updDelayTime
 function stepSel(d){STEP.sel=STEP.sel<0?0:(STEP.sel+d+16)%16;uiSteps();showPop('STEP '+(STEP.sel+1),'');}
 function stepVal(d){if(STEP.sel<0)STEP.sel=0;const s=STEP.steps[STEP.sel],mx=STEP.eng==='slice'?15:STEP.eng==='kit'?14:24;s.n=clamp(s.n+d,-1,mx);uiSteps();saveLocalSoon();}
 function pedal(on){S.pedal=on;if(!on){for(const v of pedalHeld)releaseVoice(v);pedalHeld.clear();}showPop('SUSTAIN',on?'PEDAL ▼':'PEDAL ▲');}
-function allOff(){for(const v of voices)releaseVoice(v,0,true);for(const e of ENGS)S.list[e]=[];pedalHeld.clear();uiKeys();showPop('PANIC','все ноты выкл.');}
+function allOff(){for(const v of voices)releaseVoice(v,0,true);for(const e of ENGS)S.list[e]=[];pedalHeld.clear();uiKeys();showPop('PANIC','all notes off');}
 function jogCycle(){const m=['tempo','tape','scrub'];const n=m[(m.indexOf(S.jogMode)+1)%3];document.querySelector(`.jogmode button[data-jm="${n}"]`).click();showPop('JOG',n.toUpperCase());}
 const isStandalone=()=>navigator.standalone||matchMedia('(display-mode: standalone)').matches||matchMedia('(display-mode: fullscreen)').matches;
 async function toggleLock(){
@@ -1181,7 +1182,7 @@ async function toggleLock(){
   try{
     if(document.fullscreenElement){try{navigator.keyboard&&navigator.keyboard.unlock();}catch(e){}await document.exitFullscreen();}
     else{await document.documentElement.requestFullscreen({navigationUI:'hide'});if(navigator.keyboard&&navigator.keyboard.lock)await navigator.keyboard.lock();}
-  }catch(e){toast('Полный экран недоступен в этом окне — откройте страницу отдельно');}
+  }catch(e){toast('Fullscreen is not available here — open the page directly');}
 }
 ['fullscreenchange','webkitfullscreenchange'].forEach(ev=>document.addEventListener(ev,()=>{kbLocked=!!document.fullscreenElement&&!!(navigator.keyboard&&navigator.keyboard.lock);uiKb();setTimeout(fit,50);}));
 const ACT={
@@ -1196,7 +1197,7 @@ const ACT={
   Semicolon:()=>{$('#aDiv').click();showPop('ARP DIV',DIVM[S.arp.div[S.eng]][1]);},Quote:()=>{$('#aFree').click();showPop('FREE',S.arp.free?'ON':'OFF');},Backslash:()=>{$('#aSus').click();showPop('KEY SUS',S.arp.sus?'ON':'OFF');},
   Digit4:()=>$('#tap').click(),Digit8:()=>{$('#iMon').click();showPop('MONITOR',['OFF','DRY','WET'][S.mon]);},Digit9:()=>{$('#iSrc').click();showPop('INPUT',S.src.toUpperCase());},Digit0:()=>$('#fileIn').click(),
   Backquote:()=>{S.vel=VELS[(VELS.indexOf(S.vel)+1)%VELS.length];showPop('VELOCITY',Math.round(S.vel*100));},
-  PageUp:()=>slotStep(-1),PageDown:()=>slotStep(1),Insert:()=>{S.saveMode={op:'save'};showPop('SAVE →','выберите слот 1–14');},
+  PageUp:()=>slotStep(-1),PageDown:()=>slotStep(1),Insert:()=>{S.saveMode={op:'save'};showPop('SAVE →','pick slot 1–14');},
   Comma:()=>$('#octD').click(),Period:()=>$('#octU').click(),Minus:()=>$('#octD').click(),Equal:()=>$('#octU').click(),NumpadSubtract:()=>$('#octD').click(),NumpadAdd:()=>$('#octU').click(),
   NumpadMultiply:()=>bpmStep(1),NumpadDivide:()=>bpmStep(-1),Numpad0:()=>slotSet(14),
 };
@@ -1211,12 +1212,12 @@ addEventListener('keydown',e=>{
   if(c==='Escape'){if(e.repeat)return;$('#help').classList.remove('open');S.saveMode=null;STEP.sel=-1;uiSteps();return;}
   if(helpOpen())return;
   const ctl=e.ctrlKey||e.metaKey;
-  // повторяемые действия (удержание = непрерывная крутилка)
+  // repeatable actions (hold = continuous turn)
   if(c==='ArrowUp'||c==='ArrowDown'){const d=c==='ArrowUp'?1:-1;if(ctl)stepVal(d);else nudgeKnob(d,e.shiftKey?.2:e.altKey?5:1);return;}
   if(c==='ArrowLeft'||c==='ArrowRight'){if(e.repeat&&!ctl)return;const d=c==='ArrowRight'?1:-1;if(ctl)stepSel(d);else selKnob(S.ksel+d);return;}
   if(c==='BracketLeft'||c==='BracketRight'){bpmStep((c==='BracketRight'?1:-1)*(e.shiftKey?.1:1));return;}
   if(e.repeat)return;
-  if(ctl){if(c==='KeyS')ACT.Insert();else if(c==='KeyC'){S.saveMode={op:'copy'};showPop('COPY →','выберите слот 1–14');}else if(c==='Backspace'&&STEP.sel>=0){STEP.steps[STEP.sel].n=-1;uiSteps();}return;}
+  if(ctl){if(c==='KeyS')ACT.Insert();else if(c==='KeyC'){S.saveMode={op:'copy'};showPop('COPY →','pick slot 1–14');}else if(c==='Backspace'&&STEP.sel>=0){STEP.steps[STEP.sel].n=-1;uiSteps();}return;}
   if(e.altKey)return;
   if(c==='Tab'){pedal(true);return;}
   if(c in KMAP){if(kDown.has(c))return;kDown.add(c);noteOn(KMAP[c],S.vel);return;}
@@ -1233,14 +1234,14 @@ addEventListener('keyup',e=>{
 },{capture:true});
 addEventListener('keypress',e=>{e.preventDefault();e.stopPropagation();},{capture:true});
 addEventListener('beforeunload',e=>{if(kbLocked||voices.length){e.preventDefault();e.returnValue='';}});
-function uiKb(){const el=$('#kbState');if(!el)return;const f=document.hasFocus();el.textContent=(kbLocked?'🔒 ':'⌨ ')+(f?(kbLocked?'клавиатура захвачена':'клавиатура активна'):'кликните по устройству');el.dataset.on=f?'1':'0';$('#lockBtn').setAttribute('aria-pressed',!!document.fullscreenElement);}
+function uiKb(){const el=$('#kbState');if(!el)return;const f=document.hasFocus();el.textContent=(kbLocked?'🔒 ':'⌨ ')+(f?(kbLocked?'keyboard captured':'keyboard active'):'click the device');el.dataset.on=f?'1':'0';$('#lockBtn').setAttribute('aria-pressed',!!document.fullscreenElement);}
 addEventListener('focus',uiKb);addEventListener('blur',uiKb);setInterval(uiKb,1000);
 function panic(){for(const c of kDown)if(c in KMAP)noteOff(KMAP[c]);if(kDown.has('Digit1'))stopBite();kDown.clear();setShift(false);if(S.pedal&&ctx)pedal(false);
   for(const k in keyEls){const el=keyEls[k];if(el._down){el._down=false;noteOff(+k);}}}
 addEventListener('blur',panic);
 document.addEventListener('visibilitychange',()=>{if(document.hidden)panic();});
 
-/* мышь и тач: никакого выделения, контекстных меню, перетаскивания, фокуса и зума */
+/* mouse & touch: no selection, context menus, dragging, focus or zoom */
 const inText=t=>{const el=t&&t.nodeType===1?t:t&&t.parentElement;return!!(el&&el.closest('#help .box'));};
 addEventListener('selectstart',e=>{if(!inText(e.target))e.preventDefault();},{capture:true});
 addEventListener('contextmenu',e=>e.preventDefault());
@@ -1297,7 +1298,7 @@ function draw(){
     sg.fillStyle=ink+'aa';sg.font='17px Silkscreen';sg.fillText((loopInfo.len/48000).toFixed(2)+'s  rate '+loopInfo.rate.toFixed(2),20,352);}
   if(ctx&&ctx.state!=='running'){sg.fillStyle='#ff3030';sg.font='20px Silkscreen';sg.fillText('AUDIO '+ctx.state.toUpperCase()+' — TAP',20,382);}
   if(REC.on){sg.fillStyle='#ff3030';sg.beginPath();sg.arc(W-36,286,10,0,7);sg.fill();sg.font='16px Silkscreen';sg.textAlign='right';sg.fillText('BITE '+(REC.n/48000).toFixed(1)+'s',W-54,278);sg.textAlign='left';}
-  if(S.saveMode){sg.fillStyle='#000c';sg.fillRect(0,0,W,H);sg.fillStyle=css('--a4');sg.font='30px Silkscreen';sg.textAlign='center';sg.fillText(S.saveMode.op.toUpperCase()+' → SLOT ?',W/2,H/2-40);sg.font='16px Silkscreen';sg.fillText('нажмите белую 1–14',W/2,H/2+10);sg.textAlign='left';}
+  if(S.saveMode){sg.fillStyle='#000c';sg.fillRect(0,0,W,H);sg.fillStyle=css('--a4');sg.font='30px Silkscreen';sg.textAlign='center';sg.fillText(S.saveMode.op.toUpperCase()+' → SLOT ?',W/2,H/2-40);sg.font='16px Silkscreen';sg.fillText('press white key 1–14',W/2,H/2+10);sg.textAlign='left';}
   const age=performance.now()-pop.t;
   if(age<1300&&!S.saveMode){const al=age<1000?1:1-(age-1000)/300;sg.globalAlpha=al;sg.fillStyle='#000d';sg.fillRect(60,118,W-120,150);sg.strokeStyle=ec;sg.lineWidth=2;sg.strokeRect(60,118,W-120,150);sg.textAlign='center';sg.fillStyle=ec;sg.font='22px Silkscreen';sg.fillText(pop.a,W/2,140);sg.fillStyle='#fff';sg.font='40px Silkscreen';sg.fillText(String(pop.b).slice(0,18),W/2,182);sg.textAlign='left';sg.globalAlpha=1;sg.lineWidth=1;}
   // meters
@@ -1446,13 +1447,13 @@ function power(){
   if(!ctx)ctx=makeCtx();
   unlockAudio();
   powering=(async()=>{
-    $('#powerBtn').textContent='Пеку сэмплы…';
+    $('#powerBtn').textContent='Baking samples…';
     await new Promise(r=>setTimeout(r,30));
-    await initAudio();buildFactory();await openDB();await dbLoadAll();
+    await initAudio();buildFactory();await openDB();await migrateDB();await dbLoadAll();
     for(const k in S.g)applyG(k);updDelayTime();
     unlockAudio();try{await Promise.race([ctx.resume(),new Promise(r=>setTimeout(r,800))]);}catch(e){}
-    $('#power').style.display='none';$('#status').textContent='звук: '+procMode+' · 48 кГц';
-    refreshAll();initMIDI();showPop('GNAWBOX','ням!');
+    $('#power').style.display='none';$('#status').textContent='audio: '+procMode+' · '+(ctx.sampleRate/1000)+' kHz';
+    refreshAll();initMIDI();showPop('CHOMPY','nom!');
   })();
   return powering;
 }
