@@ -1,2 +1,3 @@
-# CHOMPI
-CHOMPI emulator
+# GNAWBOX
+
+Браузерный сэмплер‑лупер по мотивам открытой прошивки CHOMPI (MIT). Открыть: index.html. На iPhone: Safari → Поделиться → На экран «Домой».
